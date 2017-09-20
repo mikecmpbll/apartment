@@ -37,6 +37,12 @@ class RakeTaskTest < Apartment::Test
     super
   end
 
+  def test_all_databases_get_dropped
+    assert_received(Apartment::Tenant, :drop, @tenants.size) do
+      @rake['apartment:drop'].invoke
+    end
+  end
+
   def test_all_databases_get_migrated
     assert_received(Apartment::Migrator, :migrate, @tenants.size) do
       @rake['apartment:migrate'].invoke
