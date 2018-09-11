@@ -4,7 +4,7 @@ module Apartment
   module Resolvers
     class Database < Abstract
       def resolve(tenant)
-        init_config.dup.tap{ |c| c[:database] = tenant }
+        tenant_names[tenant] || init_config
       end
     end
   end

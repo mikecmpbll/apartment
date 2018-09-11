@@ -30,7 +30,7 @@ module Apartment
     end
 
     def tenant_resolver
-      @tenant_resolver ||= @resolver_class.new(connection_config)
+      @tenant_resolver ||= @resolver_class.new(connection_config, tenant_names)
     end
 
     def tenant_resolver=(resolver_class)
@@ -40,10 +40,6 @@ module Apartment
 
     def tenant_names
       @tenant_names.respond_to?(:call) ? @tenant_names.call : (@tenant_names || [])
-    end
-
-    def tenants_with_config
-      extract_tenant_config
     end
 
     # Whether or not db:migrate should also migrate tenants

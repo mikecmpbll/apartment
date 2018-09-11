@@ -7,7 +7,7 @@ module Apartment
       def switch_tenant(config)
         difference = current_difference_from(config)
 
-        if difference[:host]
+        if difference[:host] || difference[:username]
           connection_switch!(config)
         else
           simple_switch(config) if difference[:database]
@@ -29,7 +29,8 @@ module Apartment
           "_apartment_#{config.hash}".to_sym
         else
           host_hash = Digest::MD5.hexdigest(config[:host] || config[:url] || "127.0.0.1")
-          "_apartment_#{host_hash}_#{config[:adapter]}".to_sym
+          username_hash = Digest::MD5.hexdigest(config[:username] || "root")
+          "_apartment_#{host_hash}_#{username_hash}_#{config[:adapter]}".to_sym
         end
       end
 
