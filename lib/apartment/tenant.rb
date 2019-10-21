@@ -8,9 +8,9 @@ module Apartment
     extend self
     extend Forwardable
 
-    def_delegators :adapter, :create, :drop, :drop_schema, :switch, :switch!,
-      :current, :each, :reset, :set_callback, :seed, :current_tenant,
-      :default_tenant, :config_for
+    def_delegators :adapter, :create, :drop, :drop_schema, :drop_database,
+      :switch, :switch!, :current, :each, :reset, :set_callback, :seed,
+      :current_tenant, :default_tenant, :config_for
 
     #   Initialize Apartment config options such as excluded_models
     #
