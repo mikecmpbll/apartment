@@ -155,6 +155,7 @@ module Apartment
       def seed_data
         silence_warnings{ load_or_abort(Apartment.seed_data_file) } if Apartment.seed_data_file
       end
+      alias_method :seed, :seed_data
 
       def load_or_abort(file)
         if File.exist?(file)
