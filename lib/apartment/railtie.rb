@@ -29,6 +29,9 @@ module Apartment
     #
     config.to_prepare do
       next if ARGV.any? { |arg| arg =~ /\Aassets:(?:precompile|clean)\z/ }
+      # In order to successfully execute `db:drop`, and prevent the raising of
+      # PG::ObjectInUse, do not run this block on `db:drop`
+      next if ARGV.any? { |arg| arg =~ /\Adb:(?:drop)\z/ }
 
       begin
         Apartment::Tenant.init
